@@ -14,7 +14,7 @@ import os
 
 import redis
 
-redis_url = os.getenv('REDIS_URL', 'redis://0.0.0.0:6379')
+redis_url = os.getenv('REDIS_URL', 'redis://red-cm18cn0cmk4c73d6ossg:6379')
 redis_client = redis.Redis.from_url(redis_url)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -102,7 +102,7 @@ ASGI_APPLICATION = 'main_apka.asgi.application'
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://0.0.0.0:6379/1',
+        'LOCATION': 'redis://red-cm18cn0cmk4c73d6ossg:6379/1',
         # Use 'redis://redis:6379/1' if 'redis' is the name in a Docker compose file or similar setup
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
@@ -114,7 +114,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('0.0.0.0', 6379)],
+            "hosts": [('redis://red-cm18cn0cmk4c73d6ossg:6379', 6379)],
             # Use [("redis", 6379)] if 'redis' is the name in a Docker compose file or similar setup
         },
     },
