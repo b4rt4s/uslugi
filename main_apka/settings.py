@@ -96,25 +96,25 @@ ASGI_APPLICATION = 'main_apka.asgi.application'
 
 REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
 
-CACHES = {
-    'default': {
+#CACHES = {
+    #'default': {
         #'BACKEND': 'django_redis.cache.RedisCache',
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [REDIS_URL],
+     #   'BACKEND': 'channels_redis.core.RedisChannelLayer',
+     #   'CONFIG': {
+      #      'hosts': [REDIS_URL],
         #'LOCATION': 'redis://127.0.0.1:6379/1',
         # Use 'redis://redis:6379/1' if 'redis' is the name in a Docker compose file or similar setup
         #'OPTIONS': {
             #'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
+       # }
+  #  }
+#}
 
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [REDIS_URL],
             # Use [("redis", 6379)] if 'redis' is the name in a Docker compose file or similar setup
         },
     },
