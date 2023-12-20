@@ -12,11 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
-import redis
-
-redis_url = os.getenv('REDIS_URL', 'redis://red-cm18cn0cmk4c73d6ossg:6379')
-redis_client = redis.Redis.from_url(redis_url)
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,7 +25,7 @@ SECRET_KEY = 'django-insecure-y1$@85q=82sng-^_t6)!lkfv9%a-xszts$!p*f8^ehc#!c4&%@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['restaurant-asystent.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -102,7 +97,7 @@ ASGI_APPLICATION = 'main_apka.asgi.application'
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://red-cm18cn0cmk4c73d6ossg:6379/1',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
         # Use 'redis://redis:6379/1' if 'redis' is the name in a Docker compose file or similar setup
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
@@ -114,7 +109,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('redis://red-cm18cn0cmk4c73d6ossg:6379', 6379)],
+            "hosts": [('127.0.0.1', 6379)],
             # Use [("redis", 6379)] if 'redis' is the name in a Docker compose file or similar setup
         },
     },
