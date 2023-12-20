@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Webpage</title>
+    <link rel="stylesheet" href="{% static '../static/style.css' %}">
+</head>
+<body>
+    <div class="centered-buttons">
+        <a href="{% url 'call_page' %}"><button class="green-button" id="button1">Zamów posiłek</button></a>
+        <a href="{% url 'call_page' %}"><button class="green-button" id="button2">Wezwij kelnera</button></a>
+        <a href="{% url 'call_page' %}"><button class="green-button" id="button3">Zapłać</button></a>
+        <a href="{% url 'menu_page' %}"><button class="green-button" >Wyświetl menu</button></a>
+        <a href="{% url 'newsletter_page' %}"><button class="yellow-button">Zapisz się do newslettera</button></a>
+    </div>
+    <script>
+        const notificationSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/notification/'
+        );
+      
+        notificationSocket.onclose = function (e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+      
+        function setupButton(buttonId, baseMessage) {
+            document.querySelector(buttonId).onclick = function (e) {
+                var tableNumber = Math.floor(Math.random() * 20) + 1; // Losowy numer stolika od 1 do 20
+                var newMessage = baseMessage.replace('9', tableNumber); // Zastąpienie numeru 9 wylosowanym numerem
+                notificationSocket.send(JSON.stringify({ 'message': newMessage }));
+            };
+        }
+        
+        setupButton('#button1', 'Klient ze stolika nr 9 chce złożyć zamówienie!');
+        setupButton('#button2', 'Klient ze stolika nr 9 prosi o podejście kelnera!');
+        setupButton('#button3', 'Klient ze stolika nr 9 chce zapłacić za zamówienie!');        
+    </script>     
+</body>
+</html>
+
