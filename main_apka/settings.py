@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+import redis
+
+redis_url = os.getenv('REDIS_URL', 'redis://0.0.0.0:6379')
+redis_client = redis.Redis.from_url(redis_url)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
