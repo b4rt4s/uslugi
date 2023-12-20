@@ -94,6 +94,8 @@ TEMPLATES = [
 
 ASGI_APPLICATION = 'main_apka.asgi.application'
 
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
+
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
